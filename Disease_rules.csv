@@ -1,0 +1,21 @@
+Disease,Prohibited_Tags
+Diabetes (Type 1 & 2),High_Simple_Sugar; Concentrated_Sweets; Uncontrolled_Carbohydrates; High_Saturated_Fat
+Hypertension (High BP),High_Sodium; Highly_Processed; High_Caffeine; High_Saturated_Fat
+Chronic Kidney Disease (CKD) - Pre-Dialysis,High_Protein; High_Phosphorus; High_Potassium; High_Sodium; Potassium_Chloride_Substitutes
+Chronic Kidney Disease (CKD) - On Dialysis,High_Phosphorus; High_Potassium; High_Sodium; High_Fluid_Volume (Severe); High_Fat
+Congestive Heart Failure (CHF),High_Sodium; High_Fluid_Volume (in single serving); Highly_Processed; Excessive_Fat
+Celiac Disease,Contains_Gluten; Contains_Wheat; Contains_Rye; Contains_Barley
+Gout,High_Purine; High_Fructose_Corn_Syrup; High_Alcohol
+Gastroesophageal Reflux Disease (GERD),High_Fat; Spicy_Food; Acidic_Food; Peppermint; Chocolate; Caffeine
+Lactose Intolerance,"Contains_Lactose; Contains_Dairy (Milk, Cream, etc.)"
+Dysphagia (Swallowing Difficulty - Pureed),Solid_Food; Chunky_Food; Sticky_Food; Thin_Liquid; Hard_Texture
+Inflammatory Bowel Disease (IBD) - Flare,High_Fiber; Raw_Vegetables; High_Fat; Spicy_Food; Caffeine; Gas_Producing_Foods
+Hyperlipidemia (High Cholesterol),High_Saturated_Fat; Trans_Fat; High_Cholesterol
+Polycystic Ovary Syndrome (PCOS),High_Simple_Sugar; High_Glycemic_Index; Refined_Carbohydrates
+Liver Disease (Cirrhosis),High_Sodium; High_Fluid_Volume (in severe cases); High_Alcohol; Raw_Seafood
+COPD (Lung Disease),High_Simple_Sugar; High_Carbohydrates (simple); Gas_Producing_Foods; Highly_Processed; High_Sodium; Large_Volume_Meal
+Vegan,Contains_Meat; Contains_Poultry; Contains_Fish; Contains_Dairy; Contains_Eggs; Contains_Honey; Contains_Gelatin
+Obsity,high_calorie
+Gluten_Intolerance,gluten
+Heart Disease,high_fat;high_sodium;trans_fat
+Kidney Disease,high_sodium;high_potassium;high_phosphorus
