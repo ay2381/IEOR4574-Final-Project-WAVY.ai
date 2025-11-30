@@ -205,3 +205,15 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Node / frontend build artifacts
+node_modules
+dist
+.env
+.env.*
+apps/frontend/node_modules
+apps/frontend/dist
+apps/backend/node_modules
+apps/backend/dist
+*.log
+.DS_Store
