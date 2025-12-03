@@ -7,7 +7,7 @@ import logging
 from openai import OpenAI, AzureOpenAI
 import time
 
-from src.config import settings
+from config import settings
 
 logger = logging.getLogger(__name__)
 
@@ -26,12 +26,26 @@ class LLMProvider(ABC):
         pass
 
 
+def _is_placeholder_key(key: str) -> bool:
+    cleaned = (key or "").strip()
+    if not cleaned:
+        return True
+    lowered = cleaned.lower()
+    placeholders = [
+        "your_openai_api_key_here",
+        "your_api_key",
+        "replace-me",
+        "changeme",
+    ]
+    return any(token in lowered for token in placeholders)
+
+
 class OpenAIProvider(LLMProvider):
     """OpenAI API provider"""
     
     def __init__(self):
-        if not settings.OPENAI_API_KEY:
-            raise ValueError("OPENAI_API_KEY not configured")
+        if _is_placeholder_key(settings.OPENAI_API_KEY):
+            raise ValueError("OPENAI_API_KEY not configured. Set a real key or leave blank to disable LLM calls.")
         self.client = OpenAI(api_key=settings.OPENAI_API_KEY)
         self.model = "gpt-4o-mini"
         logger.info("Initialized OpenAI provider")

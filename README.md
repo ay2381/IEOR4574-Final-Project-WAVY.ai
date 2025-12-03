@@ -7,9 +7,14 @@ Both the React nutrition-planner frontend and the backend service scaffolding no
 
 ```
 apps/
-  backend/        ← Backend service starter (owned by the backend team)
-  frontend/       ← Vite + React + Tailwind interface already running locally
+  backend/        ← FastAPI backend
+  frontend/       ← Vite + React + Tailwind interface
+data/
+  Disease_rules.csv
+  Recipes_with_Ingredients.csv
 ```
+
+All shared CSV assets now live under the root-level `data/` directory. Backend scripts (`make recipes-import`, `make rules-import`) read from that directory by default, so you no longer need to copy files into `apps/backend`. If you add new datasets, drop them into `data/` and commit once.
 
 ## Frontend (apps/frontend)
 

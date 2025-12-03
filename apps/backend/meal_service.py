@@ -5,7 +5,7 @@ from typing import List, Dict, Any
 from datetime import datetime, timedelta
 import logging
 
-from src.domain.plan import NutritionInfo, Meal, DailyMeals
+from plan import NutritionInfo, Meal, DailyMeals
 
 logger = logging.getLogger(__name__)
 

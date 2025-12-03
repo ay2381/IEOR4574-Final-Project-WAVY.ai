@@ -76,7 +76,7 @@ railway domain
    - **Name:** wavy-backend
    - **Environment:** Python 3
    - **Build Command:** `pip install -r requirements.txt`
-   - **Start Command:** `uvicorn src.main:app --host 0.0.0.0 --port $PORT`
+   - **Start Command:** `uvicorn main:app --host 0.0.0.0 --port $PORT`
 
 4. **Add Environment Variables:**
    ```
@@ -214,7 +214,7 @@ User=ubuntu
 WorkingDirectory=/home/ubuntu/wavy-backend
 Environment="PATH=/home/ubuntu/wavy-backend/venv/bin"
 EnvironmentFile=/home/ubuntu/wavy-backend/.env
-ExecStart=/home/ubuntu/wavy-backend/venv/bin/uvicorn src.main:app --host 0.0.0.0 --port 8080
+ExecStart=/home/ubuntu/wavy-backend/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8080
 
 [Install]
 WantedBy=multi-user.target
@@ -325,7 +325,7 @@ heroku addons:create heroku-postgresql:mini
 
 4. **Create Procfile:**
 ```bash
-echo "web: uvicorn src.main:app --host 0.0.0.0 --port \$PORT" > Procfile
+echo "web: uvicorn main:app --host 0.0.0.0 --port \$PORT" > Procfile
 ```
 
 5. **Set environment variables:**

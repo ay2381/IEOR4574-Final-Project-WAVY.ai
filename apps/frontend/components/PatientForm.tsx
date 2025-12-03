@@ -156,6 +156,7 @@ export function PatientForm({ onAddPatient }: PatientFormProps) {
           <Button
             type="button"
             onClick={() => addItem(currentRestriction, setCurrentRestriction, dietaryRestrictions, setDietaryRestrictions)}
+            className="rounded-2xl bg-[#4A7C59] text-white hover:bg-[#3f6a4c] text-sm"
           >
             Add
           </Button>
@@ -191,6 +192,7 @@ export function PatientForm({ onAddPatient }: PatientFormProps) {
           <Button
             type="button"
             onClick={() => addItem(currentAllergy, setCurrentAllergy, allergies, setAllergies)}
+            className="rounded-2xl bg-[#4A7C59] text-white hover:bg-[#3f6a4c] text-sm"
           >
             Add
           </Button>
@@ -226,6 +228,7 @@ export function PatientForm({ onAddPatient }: PatientFormProps) {
           <Button
             type="button"
             onClick={() => addItem(currentCondition, setCurrentCondition, medicalConditions, setMedicalConditions)}
+            className="rounded-2xl bg-[#4A7C59] text-white hover:bg-[#3f6a4c] text-sm"
           >
             Add
           </Button>
@@ -254,7 +257,9 @@ export function PatientForm({ onAddPatient }: PatientFormProps) {
         />
       </div>
 
-      <Button type="submit" className="w-full">Add Patient Profile</Button>
+      <Button type="submit" className="w-full rounded-2xl bg-[#4A7C59] text-white text-base font-semibold shadow-lg shadow-emerald-100 transition-transform duration-200 hover:-translate-y-0.5 hover:bg-[#3f6a4c] active:translate-y-[1px] py-3">
+        Add Patient Profile
+      </Button>
     </form>
   );
 }

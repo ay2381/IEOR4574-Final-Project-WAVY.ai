@@ -44,7 +44,7 @@ cp .env.example .env
 
 3. **Run the server:**
 ```bash
-python -m uvicorn src.main:app --reload --port 8080
+python -m uvicorn main:app --reload --port 8080
 ```
 
 ### Access the API

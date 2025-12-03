@@ -7,9 +7,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 import logging
 
-from src.api import patients, plans, llm_insights
-from src.db.database import engine, Base
-from src.config import settings
+from patients import router as patients_router
+from plans import router as plans_router
+from llm_insights import router as llm_insights_router
+from database import engine, Base
+from config import settings
 
 # Configure logging
 logging.basicConfig(
@@ -49,9 +51,9 @@ app.add_middleware(
 )
 
 # Register routers
-app.include_router(patients.router, prefix="/api", tags=["Patients"])
-app.include_router(plans.router, prefix="/api", tags=["Plans"])
-app.include_router(llm_insights.router, prefix="/api/llm", tags=["LLM"])
+app.include_router(patients_router, prefix="/api", tags=["Patients"])
+app.include_router(plans_router, prefix="/api", tags=["Plans"])
+app.include_router(llm_insights_router, prefix="/api/llm", tags=["LLM"])
 
 
 @app.get("/")

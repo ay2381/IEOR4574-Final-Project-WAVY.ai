@@ -20,10 +20,14 @@ class Meal(BaseModel):
     """Individual meal model"""
     name: str
     description: str
-    ingredients: List[str]
+    ingredients: List[str] = Field(default_factory=list)
     nutrition: NutritionInfo
     preparationTime: Optional[int] = 30  # minutes
     difficulty: Optional[str] = "medium"
+    highlights: List[str] = Field(default_factory=list)
+    tags: List[str] = Field(default_factory=list)
+    portion: float = 1.0
+    recipeId: Optional[str] = None
 
 
 class DailyMeals(BaseModel):
@@ -94,3 +98,16 @@ class ProcurementInsightsResponse(BaseModel):
     procurementNotes: List[str]
     generatedAt: str
     tokenUsage: Optional[TokenUsage] = None
+
+
+class ProcurementIngredientsPayload(BaseModel):
+    """Payload for aggregating procurement ingredients"""
+    planIds: List[str] = Field(..., min_length=1)
+
+
+class AggregatedIngredient(BaseModel):
+    """Aggregated ingredient totals"""
+    name: str
+    quantity: float
+    unit: Optional[str] = None
+

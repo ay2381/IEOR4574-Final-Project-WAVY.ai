@@ -28,12 +28,13 @@ Week Starting: {week_start}
 Generate a complete 7-day meal plan with breakfast, lunch, dinner, and optional snacks for each day.
 
 Requirements:
-1. Each meal must meet the patient's calorie and macro targets
-2. Avoid all listed allergies completely
-3. Respect all dietary restrictions
-4. Consider medical conditions when planning meals
-5. Ensure variety across the week
-6. Include realistic, practical recipes
+1. Each meal must meet the patient's calorie and macro targets.
+2. Avoid all listed allergies completely.
+3. Respect all dietary restrictions.
+4. Consider medical conditions when planning meals.
+5. Ensure variety across the week AND across patients (even if constraints match, rotate dishes, sides, or preparation style so plans are not identical).
+6. Include realistic, practical recipes.
+7. Every meal object MUST include a valid "recipe_id" referencing the provided recipe catalog. If no suitable recipe exists, craft a unique custom dish and supply a synthetic recipe_id (e.g., "custom_lunch_<patientName>_01").
 
 Return ONLY a valid JSON object with this exact structure:
 {{
@@ -52,6 +53,7 @@ Return ONLY a valid JSON object with this exact structure:
           "fiber": 0,
           "sodium": 0
         }},
+        "recipe_id": "recipe_identifier",
         "preparationTime": 30,
         "difficulty": "easy"
       }},
@@ -118,21 +120,18 @@ Top 20 Most Used Ingredients:
     prompt += """
 
 Please provide:
-1. A concise summary of procurement needs (2-3 sentences)
-2. A list of 5-10 specific procurement notes including:
-   - Bulk purchasing opportunities
-   - Storage considerations
-   - Seasonal availability notes
-   - Cost optimization tips
-   - Quality requirements
-   - Supplier recommendations
+1. A concise Markdown summary under the heading "### Summary" with 2-3 sentences.
+2. A list of 6-8 procurement notes formatted in Markdown bullets that follow this structure:
+   - **Bold Topic:** Clear recommendation with one actionable verb. Include categories such as bulk purchasing, storage, seasonal availability, cost optimization, quality requirements, supplier strategy, and dietary/medical considerations.
+   - Use professional tone, avoid repetition, and keep each note under 160 characters.
+3. Where relevant, highlight patient-specific considerations (e.g., **Diabetic substitutions**) in bold before the detail.
 
-Format your response as a JSON object:
+Return ONLY a valid JSON object:
 {
-  "summary": "Brief overview of procurement needs",
+  "summary": "Markdown summary text",
   "procurementNotes": [
-    "Note 1: Specific actionable insight",
-    "Note 2: Another insight",
+    "- **Topic:** Recommendation",
+    "- **Topic:** Recommendation",
     ...
   ]
 }"""

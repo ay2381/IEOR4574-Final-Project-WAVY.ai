@@ -3,6 +3,7 @@ import json
 import re
 import os
 import sys
+from pathlib import Path
 import google.generativeai as genai
 from typing import List, Dict, Any, Tuple
 
@@ -611,28 +612,35 @@ def main():
     print("=" * 80)
     
     # Configuration
-    WORKSPACE_PATH = r"d:\Downloads (D)\AI Engineering App\gp"
-    RECIPES_CSV = os.path.join(WORKSPACE_PATH, "Recipes_with_Ingredients.csv")
-    RULES_CSV = os.path.join(WORKSPACE_PATH, "Disease_rules.csv")
-    PATIENT_PROFILE_1 = os.path.join(WORKSPACE_PATH, "patient_profile1.json")
-    PATIENT_PROFILE_2 = os.path.join(WORKSPACE_PATH, "patient_profile2.json")
+    base_dir = Path(__file__).resolve().parent
+    data_dir = base_dir / "data"
+    RECIPES_CSV = data_dir / "Recipes_with_Ingredients.csv"
+    RULES_CSV = data_dir / "Disease_rules.csv"
+    PATIENT_PROFILE_1 = data_dir / "patient_profile1.json"
+    PATIENT_PROFILE_2 = data_dir / "patient_profile2.json"
     
     # Verify files exist
-    files_to_check = [RECIPES_CSV, RULES_CSV, PATIENT_PROFILE_1, PATIENT_PROFILE_2]
-    for file_path in files_to_check:
-        if not os.path.exists(file_path):
-            print(f"ERROR: File not found: {file_path}")
-            return
+    required_files = [RECIPES_CSV, RULES_CSV]
+    missing_required = [f for f in required_files if not f.exists()]
+    if missing_required:
+        for missing in missing_required:
+            print(f"ERROR: Missing required data file: {missing}")
+        return
     
-    print(f"\n✓ All data files found in {WORKSPACE_PATH}\n")
+    optional_profiles = [PATIENT_PROFILE_1, PATIENT_PROFILE_2]
+    for profile in optional_profiles:
+        if not profile.exists():
+            print(f"Warning: Optional patient profile not found: {profile}")
+    
+    print(f"\n✓ Data directory: {data_dir}\n")
     
     # ============ STEP 1: Load and Parse Data ============
-    df_recipes, rules_dict = load_data(RECIPES_CSV, RULES_CSV)
+    df_recipes, rules_dict = load_data(str(RECIPES_CSV), str(RULES_CSV))
     
     # ============ TEST WITH BOTH PATIENTS ============
     test_patients = [
-        ("Patient 1 (Heart Disease + Diabetes + Lactose Intolerant)", PATIENT_PROFILE_1),
-        ("Patient 2 (Vegan)", PATIENT_PROFILE_2)
+        ("Patient 1 (Heart Disease + Diabetes + Lactose Intolerant)", str(PATIENT_PROFILE_1)),
+        ("Patient 2 (Vegan)", str(PATIENT_PROFILE_2))
     ]
     
     all_results = {}

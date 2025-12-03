@@ -7,10 +7,10 @@ from typing import List
 from datetime import datetime, timedelta
 import logging
 
-from src.domain.plan import WeeklyPlan, GeneratePlanPayload
-from src.db.database import get_db
-from src.db.models import PatientModel, WeeklyPlanModel
-from src.services.plan_service import PlanGenerationService
+from plan import WeeklyPlan, GeneratePlanPayload
+from database import get_db
+from models import PatientModel, WeeklyPlanModel
+from plan_service import PlanGenerationService
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -73,6 +73,12 @@ async def generate_plans(
         
         generated_plans = []
         
+        # Remove existing plans for targeted patients to avoid duplicates
+        db.query(WeeklyPlanModel).filter(
+            WeeklyPlanModel.patient_id.in_(payload.patientIds)
+        ).delete(synchronize_session=False)
+        db.commit()
+        
         # Generate plan for each patient
         for patient in patients:
             logger.info(f"Generating plan for patient {patient.id} using {payload.strategy} strategy")
@@ -91,7 +97,7 @@ async def generate_plans(
             
             # Generate plan based on strategy
             if payload.strategy == "llm":
-                plan_data = plan_service.generate_plan_llm(patient_data, week_start)
+                plan_data = plan_service.generate_plan_llm(patient, week_start, db)
             else:
                 plan_data = plan_service.generate_plan_rule_based(patient_data, week_start)
             

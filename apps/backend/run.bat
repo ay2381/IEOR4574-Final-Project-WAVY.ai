@@ -31,4 +31,4 @@ REM Run the server
 echo Starting server on http://localhost:8080
 echo API Documentation: http://localhost:8080/docs
 echo.
-python -m uvicorn src.main:app --reload --port 8080
+python -m uvicorn main:app --reload --port 8080

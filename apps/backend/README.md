@@ -40,7 +40,7 @@ cp .env.example .env
 # At minimum, set OPENAI_API_KEY
 
 # Run the server
-python -m uvicorn src.main:app --reload --port 8080
+python -m uvicorn main:app --reload --port 8080
 ```
 
 The API will be available at `http://localhost:8080`
@@ -60,6 +60,18 @@ docker-compose up
 # Backend: http://localhost:8080
 # PostgreSQL: localhost:5432
 # Redis: localhost:6379
+
+### 3. Dataset ingestion
+
+All CSV assets live in the repository root under `data/`. After updating the CSVs, run:
+
+```bash
+cd apps/backend
+make recipes-import   # loads data/Recipes_with_Ingredients.csv into wavy.db
+make rules-import     # loads data/Disease_rules.csv into wavy.db
+```
+
+You can override the directory by setting `DATA_DIR=/some/path make recipes-import`.
 ```
 
 ### 3. Production Deployment
@@ -299,7 +311,7 @@ mypy src/
    - Check frontend is using `credentials: 'include'`
 
 4. **Import errors**
-   - Run from project root: `python -m uvicorn src.main:app`
+   - Run from project root: `python -m uvicorn main:app`
    - Ensure all `__init__.py` files exist
 
 ## Performance

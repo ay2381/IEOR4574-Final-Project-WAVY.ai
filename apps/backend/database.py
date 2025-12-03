@@ -7,7 +7,7 @@ from sqlalchemy.orm import sessionmaker, Session
 from typing import Generator
 import logging
 
-from src.config import settings
+from config import settings
 
 logger = logging.getLogger(__name__)
 

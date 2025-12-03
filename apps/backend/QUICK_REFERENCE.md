@@ -14,7 +14,7 @@ run.bat               # Windows
 ### Daily Development
 ```bash
 # Start server
-./run.sh              # or: python -m uvicorn src.main:app --reload
+./run.sh              # or: python -m uvicorn main:app --reload
 
 # Run tests
 pytest tests/ -v

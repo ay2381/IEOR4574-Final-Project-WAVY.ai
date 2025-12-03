@@ -1,28 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;600&display=swap");
 @import "tailwindcss";
 @custom-variant dark (&:is(.dark *));
 
 :root {
   --font-size: 16px;
-  --background: #ffffff;
-  --foreground: oklch(0.145 0 0);
+  --background: #fdfbf7;
+  --foreground: #1e231f;
   --card: #ffffff;
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #030213;
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.95 0.0058 264.53);
+  --primary: #4a7c59;
+  --primary-foreground: #fdfbf7;
+  --secondary: #f1ede4;
   --secondary-foreground: #030213;
-  --muted: #ececf0;
-  --muted-foreground: #717182;
-  --accent: #e9ebef;
-  --accent-foreground: #030213;
-  --destructive: #d4183d;
+  --muted: #f0e9db;
+  --muted-foreground: #6c6f6a;
+  --accent: #e3f0e6;
+  --accent-foreground: #2f3a31;
+  --destructive: #c44536;
   --destructive-foreground: #ffffff;
-  --border: rgba(0, 0, 0, 0.1);
-  --input: transparent;
-  --input-background: #f3f3f5;
-  --switch-background: #cbced4;
+  --border: #e1dacb;
+  --input: #ffffff;
+  --input-background: #f8f5ee;
+  --switch-background: #ccd8cf;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --ring: oklch(0.708 0 0);
@@ -126,6 +127,7 @@
   }
 
   body {
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
     @apply bg-background text-foreground;
   }
 }
@@ -137,19 +139,22 @@
   :where(:not(:has([class*=' text-']), :not(:has([class^='text-'])))) {
     h1 {
       font-size: var(--text-2xl);
-      font-weight: var(--font-weight-medium);
+      font-weight: 600;
+      font-family: "Merriweather", "Georgia", serif;
       line-height: 1.5;
     }
 
     h2 {
       font-size: var(--text-xl);
-      font-weight: var(--font-weight-medium);
+      font-weight: 600;
+      font-family: "Merriweather", "Georgia", serif;
       line-height: 1.5;
     }
 
     h3 {
       font-size: var(--text-lg);
       font-weight: var(--font-weight-medium);
+      font-family: "Merriweather", "Georgia", serif;
       line-height: 1.5;
     }
 

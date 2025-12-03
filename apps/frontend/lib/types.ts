@@ -13,6 +13,27 @@ export interface Patient {
 
 export type CreatePatientPayload = Omit<Patient, 'id'>;
 
+export interface Meal {
+  name?: string;
+  description?: string;
+  highlights?: string[] | string;
+  tags?: string[];
+  ingredients?: string[];
+  nutrition?: {
+    calories?: number;
+    protein?: number;
+    carbs?: number;
+    fat?: number;
+    fiber?: number;
+    sodium?: number;
+  };
+  difficulty?: string;
+  preparationTime?: number;
+  portion?: number;
+  recipeId?: string;
+  [key: string]: unknown;
+}
+
 export interface WeeklyPlan {
   id?: string;
   patientId: string;
@@ -23,10 +44,20 @@ export interface WeeklyPlan {
 
 export interface DailyMeals {
   day: string;
-  breakfast: string;
-  lunch: string;
-  dinner: string;
-  snacks: string;
+  date?: string;
+  breakfast?: Meal | string;
+  lunch?: Meal | string;
+  dinner?: Meal | string;
+  snacks?: Meal | string | Array<Meal | string>;
+  totalCalories?: number;
+  totalNutrition?: {
+    calories?: number;
+    protein?: number;
+    carbs?: number;
+    fat?: number;
+    fiber?: number;
+    sodium?: number;
+  };
 }
 
 export type PlanGenerationMode = 'rule_based' | 'llm';
@@ -50,5 +81,15 @@ export interface LlmInsightsResponse {
     promptTokens: number;
     completionTokens: number;
   };
+}
+
+export interface ProcurementIngredientsPayload {
+  planIds: string[];
+}
+
+export interface AggregatedIngredient {
+  name: string;
+  quantity: number;
+  unit?: string | null;
 }
 

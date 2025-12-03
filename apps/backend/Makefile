@@ -1,4 +1,4 @@
-.PHONY: help install run test clean docker-build docker-up docker-down lint format
+.PHONY: help install run test clean docker-build docker-up docker-down lint format recipes-import recipes-count recipes-ingredients rules-import
 
 help:
 	@echo "Available commands:"
@@ -17,7 +17,7 @@ install:
 	. venv/bin/activate && pip install -r requirements.txt
 
 run:
-	python -m uvicorn src.main:app --reload --port 8080
+	python -m uvicorn main:app --reload --port 8080
 
 test:
 	pytest tests/ -v --cov=src
@@ -48,3 +48,20 @@ lint:
 format:
 	black src/ tests/
 	isort src/ tests/
+
+VENV ?= ./venv
+PYTHON := $(VENV)/bin/python
+
+DATA_DIR ?= ../../data
+
+recipes-import:
+	$(PYTHON) scripts/import_recipes.py --csv $(DATA_DIR)/Recipes_with_Ingredients.csv --truncate
+
+recipes-count:
+	sqlite3 wavy.db "SELECT COUNT(*) FROM recipes;"
+
+recipes-ingredients:
+	sqlite3 wavy.db "SELECT meal_name, COUNT(*) FROM recipe_ingredients GROUP BY meal_name LIMIT 10;"
+
+rules-import:
+	$(PYTHON) scripts/import_disease_rules.py --csv $(DATA_DIR)/Disease_rules.csv
